@@ -3,8 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import RootLayout from "./components/layout/RootLayout.tsx";
 import Home from "./pages/Home/Home.tsx";
 import About from "./pages/About/About.tsx";
+import { useTheme } from "./hooks/useTheme.ts";
 
 function App() {
+  useTheme();
+
   return (
     <Routes>
       <Route element={<RootLayout />}>
