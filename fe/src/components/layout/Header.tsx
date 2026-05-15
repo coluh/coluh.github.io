@@ -5,8 +5,9 @@ import ServerStatus from "../common/ServerStatus";
 import ThemeToggle from "../common/ThemeToggle";
 
 const navItems = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
+  { to: "/", label: "主页" },
+  // { to: "/about", label: "About" },
+  { to: "/translate", label: "翻译" },
 ];
 
 export default function Header() {
@@ -20,7 +21,7 @@ export default function Header() {
           <Link
             key={item.to}
             to={item.to}
-            className={`rounded-lg p-2 text-center hover:text-blue-500 hover:underline dark:hover:text-blue-300 ${location.pathname === item.to ? "bg-white/50 font-bold dark:bg-black/40" : ""}`}
+            className={`rounded-lg p-2 text-center hover:text-blue-500 dark:hover:text-blue-300 ${location.pathname === item.to ? "bg-white/50 dark:bg-black/40" : ""}`}
           >
             {item.label}
           </Link>
