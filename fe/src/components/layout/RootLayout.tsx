@@ -6,7 +6,7 @@ export default function RootLayout() {
   return (
     <div className="flex min-h-screen flex-col md:flex-row">
       <Header />
-      <main className="flex-1 bg-purple-50 p-4 transition-colors dark:bg-black dark:text-gray-200">
+      <main className="flex-1 bg-white p-4 text-black transition-colors dark:bg-black dark:text-gray-200">
         <Outlet />
       </main>
     </div>

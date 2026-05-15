@@ -1,9 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 
 import RootLayout from "./components/layout/RootLayout.tsx";
-import Home from "./pages/Home/Home.tsx";
-import About from "./pages/About/About.tsx";
+import Home from "./pages/Home.tsx";
+import About from "./pages/About.tsx";
 import { useTheme } from "./hooks/useTheme.ts";
+import NotFound from "./pages/NotFound.tsx";
 
 function App() {
   useTheme();
@@ -11,8 +12,9 @@ function App() {
   return (
     <Routes>
       <Route element={<RootLayout />}>
-        <Route index path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

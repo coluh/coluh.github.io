@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 
-import { ServerStatus } from "../common/ServerStatus";
+import Avatar from "../common/Avatar";
+import ServerStatus from "../common/ServerStatus";
 import ThemeToggle from "../common/ThemeToggle";
 
 const navItems = [
@@ -12,21 +13,21 @@ export default function Header() {
   const location = useLocation();
 
   return (
-    <header className="flex flex-row items-center gap-4 overflow-x-auto bg-pink-200 p-4 transition-colors md:flex-col dark:bg-purple-700 dark:text-gray-200">
-      <h1 className="text-xl font-bold">coluh</h1>
-      <nav className="mx-auto flex flex-row items-center gap-2 md:flex-col">
+    <header className="flex flex-row gap-2 bg-pink-200 p-2 transition-colors md:w-32 md:flex-col md:p-4 dark:bg-purple-700 dark:text-gray-200">
+      <Avatar className="size-14 text-blue-400 md:mx-auto md:my-2 md:size-16" />
+      <nav className="flex flex-row gap-2 rounded-lg bg-black/10 p-2 md:flex-col dark:bg-white/20">
         {navItems.map((item) => (
           <Link
             key={item.to}
             to={item.to}
-            className={`hover:text-blue-500 hover:underline ${location.pathname === item.to ? "font-bold" : ""}`}
+            className={`rounded-lg p-2 text-center hover:text-blue-500 hover:underline dark:hover:text-blue-300 ${location.pathname === item.to ? "bg-white/50 font-bold dark:bg-black/40" : ""}`}
           >
             {item.label}
           </Link>
         ))}
       </nav>
       <ServerStatus />
-      <ThemeToggle />
+      <ThemeToggle className="my-auto mr-0 ml-auto md:mx-auto md:mt-auto md:mb-0" />
     </header>
   );
 }

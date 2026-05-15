@@ -6,7 +6,7 @@ type Props = {
   url?: string;
 };
 
-export function ServerStatus({
+export default function ServerStatus({
   url = import.meta.env.VITE_SERVER_URL || "http://localhost:3300",
 }: Props) {
   const [status, setStatus] = useState<ServerStatus>("checking");
@@ -41,21 +41,20 @@ export function ServerStatus({
         : "检测中...";
   const style =
     status === "online"
-      ? "bg-green-500"
+      ? "bg-green-500 dark:bg-green-900"
       : status === "offline"
-        ? "bg-amber-500"
-        : "bg-blue-500";
+        ? "bg-amber-500 dark:bg-amber-900"
+        : "bg-blue-500 dark:bg-blue-900";
 
   return (
-    <button
-      onClick={check}
-      disabled={status === "checking"}
-      className={`flex cursor-default flex-col items-center rounded-lg p-2 text-sm font-bold text-white ${style}`}
+    <div
+      onClick={status !== "checking" ? check : undefined}
+      className={`flex cursor-default flex-col items-center rounded-lg p-2 text-sm font-bold text-white dark:text-gray-200 ${style}`}
     >
       <span>
-        <i>{domain}</i>
+        <i className="text-xs font-medium">{domain}</i>
       </span>
       <span>{text}</span>
-    </button>
+    </div>
   );
 }
