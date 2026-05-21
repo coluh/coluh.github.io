@@ -16,6 +16,12 @@ cd server && go build cmd/server/main.go
 deploy:
 
 ```Shell
-sudo cp -r fe/dist/* /var/www/html/
+cd fe && sudo cp -r dist/* /var/www/html/
 cd server && ./main
 ```
+
+todo:
+- js game
+- online game
+- ai chat room
+- message board
