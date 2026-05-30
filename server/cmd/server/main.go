@@ -16,9 +16,6 @@ func main() {
 
 	api := r.Group("/api")
 	{
-		api.HEAD("/health", func(c *gin.Context) {
-			c.JSON(200, gin.H{"status": "ok"})
-		})
 		api.GET("/health", func(c *gin.Context) {
 			c.JSON(200, gin.H{"status": "ok"})
 		})

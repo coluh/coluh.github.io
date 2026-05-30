@@ -15,7 +15,6 @@ export default function ServerStatus({
   const check = useCallback(() => {
     setStatus("checking");
     fetch(`${url}/api/health`, {
-      method: "HEAD",
       cache: "no-cache",
     })
       .then((res) => {

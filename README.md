@@ -21,7 +21,10 @@ cd server && ./main
 ```
 
 todo:
+- home page(entry, status, random sentence, weather)
 - js game
+- star page
+- github actions
 - online game
 - ai chat room
 - message board

@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslateConfigStore } from "../stores/useTranslateConfigStore";
 
 const isEnglish = (str: string): boolean => /^[\x20-\x7F]+$/.test(str);
 
 export default function TranslatePage() {
+  const { endpoint, model, apiKey, setEndpoint, setModel, setApiKey } =
+    useTranslateConfigStore();
   const [sourceText, setSourceText] = useState("");
   const [targetText, setTargetText] = useState("");
   const [sourceLang, setSourceLang] = useState("auto");
@@ -52,25 +55,22 @@ export default function TranslatePage() {
     }
 
     try {
-      const res = await fetch(
-        "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_DASHSCOPE_API_KEY}`,
-          },
-          body: JSON.stringify({
-            model: "qwen-mt-flash",
-            messages: [{ role: "user", content: sourceText }],
-            translation_options: {
-              source_lang: sl,
-              target_lang: tl,
-            },
-          }),
-          signal: controller.signal,
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
         },
-      );
+        body: JSON.stringify({
+          model: model,
+          messages: [{ role: "user", content: sourceText }],
+          translation_options: {
+            source_lang: sl,
+            target_lang: tl,
+          },
+        }),
+        signal: controller.signal,
+      });
       const data = await res.json();
       setTargetText(data.choices[0].message.content);
     } catch (error) {
@@ -83,7 +83,7 @@ export default function TranslatePage() {
     } finally {
       setTranslating(false);
     }
-  }, [sourceText, sourceLang, targetLang]);
+  }, [sourceText, sourceLang, targetLang, endpoint, model, apiKey]);
 
   useEffect(() => {
     if (!sourceText.trim()) {
@@ -97,7 +97,38 @@ export default function TranslatePage() {
   }, [doTranslate, sourceText, sourceLang, targetLang]);
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-pink-200 via-cyan-100 to-cyan-200 p-8 dark:from-purple-700 dark:via-cyan-900 dark:to-slate-700">
+    <div className="flex min-h-screen flex-col gap-4 bg-linear-to-b from-teal-200 via-cyan-100 to-sky-200 p-8 dark:from-purple-700 dark:via-violet-900 dark:to-teal-700">
+      <div className="flex flex-row gap-4 rounded-2xl bg-white/50 p-4 shadow-md dark:bg-black/20">
+        <label className="flex flex-2 items-center gap-2">
+          Endpoint:
+          <input
+            type="text"
+            value={endpoint}
+            onChange={(e) => setEndpoint(e.target.value)}
+            className="flex-1 rounded-lg bg-white/70 px-3 py-2 outline-none dark:bg-black/30"
+          />
+        </label>
+        <label className="flex flex-1 items-center gap-2">
+          Model:
+          <input
+            type="text"
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
+            className="flex-1 rounded-lg bg-white/70 px-3 py-2 outline-none dark:bg-black/30"
+          />
+        </label>
+        <label className="flex flex-1 items-center gap-2">
+          API_Key:
+          <input
+            type="password"
+            value={apiKey}
+            onChange={(e) => setApiKey(e.target.value)}
+            className="flex-1 rounded-lg bg-white/70 px-3 py-2 outline-none dark:bg-black/30"
+          />
+        </label>
+        {/* <button className="rounded-lg bg-pink-200 px-4 py-2">重置</button>
+        <button className="rounded-lg bg-cyan-200 px-4 py-2">保存</button> */}
+      </div>
       <div className="flex flex-col gap-4 rounded-2xl bg-white/50 p-4 shadow-xl dark:bg-black/20">
         <div className="flex flex-row justify-center gap-8">
           <select
