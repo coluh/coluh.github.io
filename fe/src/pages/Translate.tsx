@@ -121,6 +121,7 @@ export default function TranslatePage() {
           API_Key:
           <input
             type="password"
+            autoComplete="off"
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
             className="flex-1 rounded-lg bg-white/70 px-3 py-2 outline-none dark:bg-black/30"
