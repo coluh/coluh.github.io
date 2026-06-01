@@ -97,9 +97,9 @@ export default function TranslatePage() {
   }, [doTranslate, sourceText, sourceLang, targetLang]);
 
   return (
-    <div className="flex min-h-screen flex-col gap-4 bg-linear-to-b from-teal-200 via-cyan-100 to-sky-200 p-8 dark:from-purple-700 dark:via-violet-900 dark:to-teal-700">
-      <div className="flex flex-row gap-4 rounded-2xl bg-white/50 p-4 shadow-md dark:bg-black/20">
-        <label className="flex flex-2 items-center gap-2">
+    <div className="flex min-h-screen flex-col gap-4 bg-linear-to-b from-teal-200 via-cyan-100 to-sky-200 p-4 dark:from-purple-700 dark:via-violet-900 dark:to-teal-700">
+      <div className="flex max-w-3xl flex-col gap-4 rounded-2xl bg-white/50 p-4 shadow-md dark:bg-black/20">
+        <label className="flex flex-1 items-center gap-2">
           Endpoint:
           <input
             type="text"
@@ -127,8 +127,6 @@ export default function TranslatePage() {
             className="flex-1 rounded-lg bg-white/70 px-3 py-2 outline-none dark:bg-black/30"
           />
         </label>
-        {/* <button className="rounded-lg bg-pink-200 px-4 py-2">重置</button>
-        <button className="rounded-lg bg-cyan-200 px-4 py-2">保存</button> */}
       </div>
       <div className="flex flex-col gap-4 rounded-2xl bg-white/50 p-4 shadow-xl dark:bg-black/20">
         <div className="flex flex-row justify-center gap-8">
@@ -137,7 +135,7 @@ export default function TranslatePage() {
             id="sl"
             value={sourceLang}
             onChange={(e) => setSourceLang(e.target.value)}
-            className="w-24 rounded-lg px-3 py-2 backdrop-blur-lg hover:bg-white/50"
+            className="rounded-lg px-3 py-2 backdrop-blur-lg hover:bg-white/50"
           >
             <option value="auto">Auto</option>
             <option value="Chinese">Chinese</option>
@@ -151,14 +149,14 @@ export default function TranslatePage() {
             id="tl"
             value={targetLang}
             onChange={(e) => setTargetLang(e.target.value)}
-            className="w-24 rounded-lg px-3 py-2 backdrop-blur-lg hover:bg-white/50"
+            className="rounded-lg px-3 py-2 backdrop-blur-lg hover:bg-white/50"
           >
             <option value="auto">Auto</option>
             <option value="Chinese">Chinese</option>
             <option value="English">English</option>
           </select>
         </div>
-        <div className="flex flex-col gap-4 md:flex-row">
+        <div className="flex flex-col gap-4 lg:flex-row">
           <textarea
             name="source"
             id="source"
@@ -172,7 +170,7 @@ export default function TranslatePage() {
               }
             }}
             placeholder="Enter text to translate..."
-            className="min-h-64 flex-1 resize-none rounded-lg bg-white/70 p-2 outline-none dark:bg-black/30"
+            className="min-h-48 flex-1 resize-none rounded-lg bg-white/70 p-2 outline-none dark:bg-black/30"
           ></textarea>
           <textarea
             readOnly
@@ -183,7 +181,7 @@ export default function TranslatePage() {
             placeholder={
               translating ? "Translating..." : "Translation will appear here..."
             }
-            className="min-h-64 flex-1 resize-none rounded-lg bg-white/70 p-2 caret-transparent outline-none dark:bg-black/30"
+            className="min-h-48 flex-1 resize-none rounded-lg bg-white/70 p-2 caret-transparent outline-none dark:bg-black/30"
           ></textarea>
         </div>
       </div>
