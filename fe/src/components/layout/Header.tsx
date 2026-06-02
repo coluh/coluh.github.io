@@ -8,6 +8,7 @@ const navItems = [
   { to: "/", label: "主页" },
   // { to: "/about", label: "About" },
   { to: "/translate", label: "翻译" },
+  { to: "/swords", label: "剑客" },
 ];
 
 export default function Header() {
