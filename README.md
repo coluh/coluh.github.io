@@ -22,7 +22,7 @@ cd server && ./main
 
 todo:
 - home page(entry, status, random sentence, weather)
-- js game
+- js game concise collison
 - star page
 - github actions
 - online game
