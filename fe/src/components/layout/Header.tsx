@@ -1,15 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 
 import Avatar from "../common/Avatar";
-import ServerStatus from "../common/ServerStatus";
 import ThemeToggle from "../common/ThemeToggle";
 
-const navItems = [
-  { to: "/", label: "主页" },
-  // { to: "/about", label: "About" },
-  { to: "/translate", label: "翻译" },
-  { to: "/swords", label: "剑客" },
-];
+const navItems = [{ to: "/", label: "翻译" }];
 
 export default function Header() {
   const location = useLocation();
@@ -28,7 +22,6 @@ export default function Header() {
           </Link>
         ))}
       </nav>
-      <ServerStatus />
       <ThemeToggle className="my-auto mr-0 ml-auto md:mx-auto md:mt-auto md:mb-0" />
     </header>
   );
