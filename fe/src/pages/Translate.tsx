@@ -29,6 +29,31 @@ export default function TranslatePage() {
     }
   }, [targetText]);
 
+  // Press "f" to focus the source textarea.
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key.toLowerCase() !== "f" || e.ctrlKey || e.metaKey || e.altKey) {
+        return;
+      }
+      const el = e.target;
+      if (
+        el instanceof HTMLElement &&
+        el.closest("input, textarea, select, [contenteditable='true']")
+      ) {
+        return;
+      }
+      e.preventDefault();
+      sourceRef.current?.focus();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  // Focus the source textarea as soon as the page mounts.
+  useEffect(() => {
+    sourceRef.current?.focus();
+  }, []);
+
   const swapLangs = () => {
     setSourceLang(targetLang);
     setTargetLang(sourceLang);
